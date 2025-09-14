@@ -1,0 +1,6 @@
+export { AcademicOverview } from '../../dashboard/AcademicOverview'
+export { AnalyticsOverview } from '../../dashboard/AnalyticsOverview'
+export { DashboardStats } from '../../dashboard/DashboardStats'
+export { ExpenseOverview } from '../../dashboard/ExpenseOverview'
+export { QuickActions } from '../../dashboard/QuickActions'
+export { StudentInfo } from '../../dashboard/StudentInfo'

@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://campussync.lovable.app/sitemap.xml
+
+# Block access to admin areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all crawlers to access the main content
+Allow: /dashboard
+Allow: /timetable
+Allow: /tasks
+Allow: /notes
+Allow: /expenses
+Allow: /courses/
+Allow: /schedule/
+Allow: /calculators
+Allow: /community
+Allow: /news
+Allow: /blog
+Allow: /about
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1

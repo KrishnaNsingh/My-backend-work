@@ -1,0 +1,1 @@
+export { TeacherRoutes } from './TeacherRoutes'

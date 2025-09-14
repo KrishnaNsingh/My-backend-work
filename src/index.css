@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light theme - CampusSync brand colors */
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 48 96% 53%;
+    --warning-foreground: 26 83% 14%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 355 80% 95%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --radius: 0.75rem;
+
+    /* Chart color system for expenses */
+    --color-income: 142 71% 45%;     /* Rich emerald green */
+    --color-expenses: 0 84% 60%;     /* Professional red */
+    --color-savings: 217 91% 60%;    /* Primary blue */
+    --color-amount: 262 83% 65%;     /* Professional purple */
+
+    /* Enhanced chart colors for expense tracking - professional gradient palette */
+    --chart-1: 142 71% 45%;  /* Rich emerald green for income */
+    --chart-2: 0 84% 60%;    /* Professional red for expenses */
+    --chart-3: 217 91% 60%;  /* Primary blue for food */
+    --chart-4: 262 83% 65%;  /* Professional purple for books */
+    --chart-5: 39 100% 50%;  /* Golden orange for transport */
+    --chart-6: 290 98% 65%;  /* Vibrant magenta for entertainment */
+
+    /* CampusSync gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(224.3 76.3% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(210 40% 98%), hsl(210 40% 96.1%));
+    --gradient-hero: linear-gradient(135deg, hsl(217.2 91.2% 59.8%) 0%, hsl(262 83% 58%) 50%, hsl(224.3 76.3% 48%) 100%);
+    
+    /* Professional spacing and typography tokens */
+    --spacing-hero: 4rem;
+    --spacing-section: 3rem;
+    --text-hero-primary: 3.5rem;
+    --text-hero-secondary: 1.5rem;
+    --text-hero-body: 1.125rem;
+
+    /* Sidebar light theme */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark AMOLED theme - True black with blue accents */
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 7%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 0 0% 7%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 48 96% 63%;
+    --warning-foreground: 20 14.3% 4.1%;
+
+    --success: 142 71% 55%;
+    --success-foreground: 355 80% 95%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217.2 91.2% 59.8%;
+
+    /* Chart color system for expenses (dark theme) */
+    --color-income: 142 71% 55%;     /* Bright emerald green */
+    --color-expenses: 0 84% 70%;     /* Bright professional red */
+    --color-savings: 217 91% 70%;    /* Bright primary blue */
+    --color-amount: 262 83% 75%;     /* Bright professional purple */
+
+    /* Enhanced chart colors for expense tracking (dark theme optimized) */
+    --chart-1: 142 71% 55%;  /* Bright emerald green for income */
+    --chart-2: 0 84% 70%;    /* Bright professional red for expenses */
+    --chart-3: 217 91% 70%;  /* Bright primary blue for food */
+    --chart-4: 262 83% 75%;  /* Bright professional purple for books */
+    --chart-5: 39 100% 60%;  /* Bright golden orange for transport */
+    --chart-6: 290 98% 75%;  /* Bright vibrant magenta for entertainment */
+
+    /* AMOLED optimized gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(224.3 76.3% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 3.9%));
+
+    /* Sidebar dark AMOLED theme */
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 7%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 0 0% 14.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Hide all scrollbars site-wide while preserving scroll functionality */
+  html, body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  
+  /* Hide all WebKit scrollbars */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Ensure smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Mobile responsive utilities for headings and descriptions */
+  .mobile-hide-description {
+    @apply hidden sm:block;
+  }
+  
+  .mobile-heading {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+  
+  .mobile-heading-large {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  .mobile-heading-xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+}
+

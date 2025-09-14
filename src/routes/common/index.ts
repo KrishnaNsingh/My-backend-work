@@ -1,0 +1,1 @@
+export { CommonRoutes } from './CommonRoutes'
