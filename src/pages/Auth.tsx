@@ -54,50 +54,71 @@ export default function Auth() {
     }
   }, [searchParams])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Mock user data - in a real app, this would come from your auth API
-      const role = selectedRole ?? 'student'
-      const userData = {
-        id: '1',
-        name: isSignUp ? name : 'John Doe',
-        email: email,
-        collegeName: isSignUp ? collegeName : 'Example University',
-        role,
-      }
-      
-      // Update user profile data from auth form
-      if (isSignUp) {
-        updateUserData({
-          name: name,
-          email: email,
-          course: collegeName
-        })
-      } else {
-        updateUserData({
-          name: userData.name,
-          email: email
-        })
-      }
-      
-      // Log the user in
-      login(userData)
-      
-      // Redirect based on role
-      const panelPath = role === 'admin' ? '/admin/profile' : role === 'teacher' ? '/teacher/profile' : '/'
-      navigate(panelPath, { replace: true })
-    } catch (error) {
-      console.error('Auth error:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+
+
+  const API_URL = "http://localhost:5000/api/auth" // change when you deploy
+
+        const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setIsLoading(true)
+
+        try {
+            let response;
+            if (isSignUp) {
+            // Register API
+            response = await fetch(`${API_URL}/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                name,
+                email,
+                password,
+                collegeName,
+                role: selectedRole ?? "student",
+                }),
+            })
+            } else {
+            // Login API
+            response = await fetch(`${API_URL}/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                email,
+                password,
+                role: selectedRole ?? "student",
+                }),
+            })
+            }
+
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.message || "Auth failed")
+
+            // 🔑 Save JWT token
+            if (data.token) {
+            localStorage.setItem("token", data.token)
+            }
+
+            // 👤 Update frontend state
+            updateUserData({
+            name: data.user?.name || name,
+            email: data.user?.email || email,
+            course: data.user?.collegeName || collegeName,
+            })
+            login(data.user)
+
+            // Redirect based on role
+            const role = data.user?.role || selectedRole
+            const panelPath =
+            role === "admin" ? "/admin/profile" :
+            role === "teacher" ? "/teacher/profile" : "/"
+
+            navigate(panelPath, { replace: true })
+        } catch (error) {
+            console.error("Auth error:", error)
+        } finally {
+            setIsLoading(false)
+        }
+        }
 
   const nextStep = () => {
     if (isSignUp && formStep === 1) {
