@@ -289,6 +289,11 @@ export const AuthFormFields: React.FC<AuthFormFieldsProps> = ({
 
 // Social Login Component
 export const AuthSocialLogin: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
+  const handleGoogleLogin = () => {
+    // Redirect to your backend's Google OAuth initiation endpoint
+    window.location.href = "http://localhost:5000/api/auth/google";
+  };
+
   return (
     <>
       {/* Divider */}
@@ -307,6 +312,7 @@ export const AuthSocialLogin: React.FC<{ isMobile?: boolean }> = ({ isMobile = f
       <Button 
         type="button"
         variant="outline" 
+        onClick={handleGoogleLogin}
         className={`w-full h-12 font-medium ${isMobile ? 'bg-white/20 border-white/30 text-white hover:bg-white/30' : ''}`}
       >
         <Chrome className="mr-2 h-4 w-4" />

@@ -3,11 +3,38 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
-// helper function
+// helper function for JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, "your_jwt_secret", { expiresIn: "7d" }); 
+  return jwt.sign({ id }, process.env.JWT_SECRET || "your_jwt_secret", {
+    expiresIn: "7d",
+  });
 };
+
+// ======================
+// Google OAuth Routes
+// ======================
+
+// Redirect user to Google for login
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// Callback after Google login
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    // If login successful, redirect to frontend
+    res.redirect("http://localhost:3000/");
+  }
+);
+
+// ======================
+// Normal Auth Routes
+// ======================
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -23,7 +50,8 @@ router.post("/register", async (req, res) => {
     }
 
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: "User already exists" });
+    if (userExists)
+      return res.status(400).json({ message: "User already exists" });
 
     // hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -37,8 +65,8 @@ router.post("/register", async (req, res) => {
       user: {
         id: user._id,
         email: user.email,
-        role: user.role
-      }
+        role: user.role,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -55,7 +83,8 @@ router.post("/login", async (req, res) => {
     }
 
     const user = await User.findOne({ email, role });
-    if (!user) return res.status(400).json({ message: "User not found for this role" });
+    if (!user)
+      return res.status(400).json({ message: "User not found for this role" });
 
     // compare entered password with hashed password
     const isMatch = await bcrypt.compare(password, user.password);
@@ -69,8 +98,8 @@ router.post("/login", async (req, res) => {
       user: {
         id: user._id,
         email: user.email,
-        role: user.role
-      }
+        role: user.role,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
