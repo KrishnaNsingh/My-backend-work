@@ -28,7 +28,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     // If login successful, redirect to frontend
-    res.redirect("http://localhost:3000/");
+    res.redirect("http://localhost:5001/");
   }
 );
 
